@@ -76,7 +76,6 @@ jQuery.extend({
     }
 });
 
-
 // Deal with indexOf issue in <IE9
 // provided by commentary in repo issue - https://github.com/okfn/facetview/issues/18
 if (!Array.prototype.indexOf) {
