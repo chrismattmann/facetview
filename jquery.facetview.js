@@ -4,7 +4,7 @@
  * displays faceted browse results by querying a specified elasticsearch index
  * can read config locally or can be passed in as variable when executed
  * or a config variable can point to a remote config
- * 
+ *
  * created by Mark MacGillivray - mark@cottagelabs.com
  *
  * http://cottagelabs.com
@@ -22,7 +22,7 @@ var MONTHS = [
 var dd_width = 850;
 var dd_height = 300;
 
-// first define the bind with delay function from (saves loading it separately) 
+// first define the bind with delay function from (saves loading it separately)
 // https://github.com/bgrins/bindWithDelay/blob/master/bindWithDelay.js
 
 (function($) {
@@ -123,28 +123,28 @@ Once facetview has executed a query, the querystring used is available under "op
 And the result object as retrieved directly from the index is available under "options.rawdata".
 searchbox_class
 ---------------
-This should only be set if embedded_search is set to false, and if an alternative search box on the page should 
-be used as the source of search terms. If so, this should be set to 
+This should only be set if embedded_search is set to false, and if an alternative search box on the page should
+be used as the source of search terms. If so, this should be set to
 the class name (including preceding .) of the text input that should be used as the source of the search terms.
-It is only a class instead of an ID so that it can be applied to fields that may already have an ID - 
+It is only a class instead of an ID so that it can be applied to fields that may already have an ID -
 it should really identify a unique box on the page for entering search terms for this instance of facetview.
 So an ID could actually also be used - just precede with # instead of .
-This makes it possible to embed a search box anywhere on a page and have it be used as the source of simple 
+This makes it possible to embed a search box anywhere on a page and have it be used as the source of simple
 search parameters for the facetview. Only the last text box with this clas will be used.
 embedded_search
 ---------------
 Default to true, in which case full search term functionality is created and displayed on the page.
-If this is false, the search term text box and options will be hidden, so that new search terms cannot 
+If this is false, the search term text box and options will be hidden, so that new search terms cannot
 be provided by the user.
-It is possible to set an alternative search term input box on the page instead, by setting this to false and 
-also setting a searchbox_class value to identify the basic source of search terms, in which case such a box 
+It is possible to set an alternative search term input box on the page instead, by setting this to false and
+also setting a searchbox_class value to identify the basic source of search terms, in which case such a box
 must be manually created elsewhere on the page.
 searchbox_shade
 ---------------
 The background colour to apply to the search box
 sharesave_link
 --------------
-Default to true, in which case the searchbox - if drawn by facetview - will be appended with a button that 
+Default to true, in which case the searchbox - if drawn by facetview - will be appended with a button that
 shows the full current search parameters as a URL.
 config_file
 -----------
@@ -157,16 +157,16 @@ If these should be nested, define them with full scope e.g. nestedobj.nestedfiel
 extra_facets
 ------------
 An object of named extra facet objects that should be submitted and executed on each query.
-These will NOT be used to generate filters on the page, but the result object can be queried 
+These will NOT be used to generate filters on the page, but the result object can be queried
 for their content for other purposes.
 searchbox_fieldselect
 ---------------------
 A list of objects specifying fields to which search terms should be restricted.
-Each object should have a "display" value for displaying as the name of the option, 
+Each object should have a "display" value for displaying as the name of the option,
 and a "field" option specifying the field to restrict the search to.
 search_sortby
 ----------------
-A list of objects describing sort option dropdowns. 
+A list of objects describing sort option dropdowns.
 Each object requires a "display" value, and "field" value upon which to sort results.
 NOTE sort fields must be unique on the ES index, NOT lists. Otherwise it will fail silently. Choose wisely.
 enable_rangeselect
@@ -177,22 +177,22 @@ include_facets_in_querystring
 -----------------------------
 Default to false.
 Whether or not to include full facet settings in the querystring when it is requested for display.
-This makes it easier to get the querystring for other purposes, but does not change the query that is 
+This makes it easier to get the querystring for other purposes, but does not change the query that is
 sent to the index.
 result_display
 --------------
 A display template for search results. It is a list of lists.
-Each list specifies a line. Within each list, specify the contents of the line using objects to describe 
-them. Each content piece should pertain to a particular "field" of the result set, and should specify what 
+Each list specifies a line. Within each list, specify the contents of the line using objects to describe
+them. Each content piece should pertain to a particular "field" of the result set, and should specify what
 to show "pre" and "post" the given field
 display_images
 --------------
-Default to true, in which case any image found in a given result object will be displayed to the left 
+Default to true, in which case any image found in a given result object will be displayed to the left
 in the result object output.
 description
 -----------
 Just an option to provide a human-friendly description of the functionality of the instantiated facetview.
-Like "search my shop". Will be displayed on the page. 
+Like "search my shop". Will be displayed on the page.
 search_url
 ----------
 The URL at the index to which searches should be submitted in order to retrieve JSON results.
@@ -224,13 +224,13 @@ This field specifies in milliseconds how long to wait before sending another que
 for the user to finish typing a word.
 q
 -
-Specify a query value to start with when the page is loaded. Will be submitted as the initial search value 
+Specify a query value to start with when the page is loaded. Will be submitted as the initial search value
 if initialsearch is enabled. Will also be set as the value of the searchbox on page load.
 predefined_filters
 ------------------
-Facet / query values to apply to all searches. Give each one a reference key, then in each object define it 
-as per an elasticsearch query for appending to the bool must. 
-If these filters should be applied at the nested level, then prefix the name with the relevant nesting prefix. 
+Facet / query values to apply to all searches. Give each one a reference key, then in each object define it
+as per an elasticsearch query for appending to the bool must.
+If these filters should be applied at the nested level, then prefix the name with the relevant nesting prefix.
 e.g. if the nested object is called stats, call the filter stats.MYFILTER.
 filter
 -------
@@ -246,13 +246,13 @@ An object defining the paging settings:
     How many results to get and display per "page" of results
 pager_on_top
 ------------
-Default to false, in which case the pager - e.g. result count and prev / next page buttons - only appear 
+Default to false, in which case the pager - e.g. result count and prev / next page buttons - only appear
 at the bottom of the search results.
 Set to true to show the pager at the top of the search results as well.
 pager_slider
 ------------
-If this is set to true, then the paging options will be a left and right arrow at the bottom, with the 
-count in between, but a bit bigger and more slider-y than the standard one. Works well for displaying 
+If this is set to true, then the paging options will be a left and right arrow at the bottom, with the
+count in between, but a bit bigger and more slider-y than the standard one. Works well for displaying
 featured content, for example.
 sort
 ----
@@ -267,8 +267,8 @@ resultwrap_end
 HTML values in which to wrap each result object
 result_box_colours
 ------------------
-A list of background colours that will be randomly assigned to each result object that has the "result_box" 
-class. To use this, specify the colours in this list and ensure that the "result_display" option uses the 
+A list of background colours that will be randomly assigned to each result object that has the "result_box"
+class. To use this, specify the colours in this list and ensure that the "result_display" option uses the
 "result_box" class to wrap the result objects.
 fadein
 ------
@@ -288,9 +288,9 @@ Sets the default operator in text search strings - elasticsearch uses OR by defa
 default_freetext_fuzzify
 ------------------------
 If this exists and is not false, it should be either * or ~. If it is * then * will be prepended and appended
-to each string in the freetext search term, and if it is ~ then ~ will be appended to each string in the freetext 
-search term. If * or ~ or : are already in the freetext search term, it will be assumed the user is already trying 
-to do a complex search term so no action will be taken. NOTE these changes are not replicated into the freetext 
+to each string in the freetext search term, and if it is ~ then ~ will be appended to each string in the freetext
+search term. If * or ~ or : are already in the freetext search term, it will be assumed the user is already trying
+to do a complex search term so no action will be taken. NOTE these changes are not replicated into the freetext
 search box - the end user will not know they are happening.
 */
 
@@ -359,7 +359,7 @@ search box - the end user will not know they are happening.
                         "highlight_field": "text",
                         "post": "</span>"
                     }
-                ]    
+                ]
             ];
 
         // specify the defaults
@@ -432,7 +432,7 @@ search box - the end user will not know they are happening.
         // ===============================================
         // functions to do with filters
         // ===============================================
-        
+
         // show the filter values
         var showfiltervals = function(event) {
             event.preventDefault();
@@ -499,7 +499,7 @@ search box - the end user will not know they are happening.
             }
             dosearch();
         };
-        
+
         // adjust how many results are shown
         var morefacetvals = function(event) {
             event.preventDefault();
@@ -524,7 +524,7 @@ search box - the end user will not know they are happening.
             var range = $('#facetview_rangechoices_' + rel, obj).html();
             var newobj = '<div style="display:none;" class="btn-group" id="facetview_rangeresults_' + rel + '"> \
                 <a class="facetview_filterselected facetview_facetrange facetview_clear \
-                btn btn-info" rel="' + rel + 
+                btn btn-info" rel="' + rel +
                 '" alt="remove" title="remove"' +
                 ' href="' + $(this).attr("href") + '">' +
                 range + ' <i class="icon-white icon-remove"></i></a></div>';
@@ -589,7 +589,7 @@ search box - the end user will not know they are happening.
                 var filters = options.facets;
                 var thefilters = '';
                 for ( var idx = 0; idx < filters.length; idx++ ) {
-                    var _filterTmpl = '<table id="facetview_{{FILTER_NAME}}" class="facetview_filters table table-bordered table-condensed table-striped" style="display:none;"> \
+                    var _filterTmpl = '<table id="facetview_{{FILTER_NAME}}" class="facetview_filters table table-bordered table-condensed table-striped"> \
                         <tr><td><a class="facetview_filtershow" title="filter by {{FILTER_DISPLAY}}" rel="{{FILTER_NAME}}" \
                         style="color:#333; font-weight:bold;" href=""><i class="icon-plus"></i> {{FILTER_DISPLAY}} \
                         </a> \
@@ -667,7 +667,7 @@ search box - the end user will not know they are happening.
             if ( $('.facetview_or[href="' + rel + '"]', obj).attr('rel') == 'OR' ) {
                 newobj += ' facetview_logic_or';
             }
-            newobj += '" rel="' + rel + 
+            newobj += '" rel="' + rel +
                 '" alt="remove" title="remove"' +
                 ' href="' + href + '">' +
                 href + ' <i class="icon-white icon-remove" style="margin-top:1px;"></i></a>';
@@ -698,7 +698,7 @@ search box - the end user will not know they are happening.
             }
             dosearch();
         };
-        
+
         // ===============================================
         // functions to do with building results
         // ===============================================
@@ -810,6 +810,9 @@ search box - the end user will not know they are happening.
             var result = options.resultwrap_start;
             // add first image where available
             if (options.display_images) {
+
+                // TODO: this is where we need to take the URL as stored in ID field, translate it to a web URL, and show it.
+
                 var recstr = JSON.stringify(record);
                 var regex = /(http:\/\/\S+?\.(jpg|png|gif|jpeg))/;
                 var img = regex.exec(recstr);
@@ -826,17 +829,16 @@ search box - the end user will not know they are happening.
                     var thekey = display[lineitem][object]['field'];
                     var thevalue = getvalue(record, thekey);
                     if (thevalue && thevalue.toString().length) {
-                        display[lineitem][object]['pre']
-                            ? line += display[lineitem][object]['pre'] : false;
+                            line += display[lineitem][object]['pre'] ? display[lineitem][object]['pre'] : false;
                         if ( typeof(thevalue) == 'object' ) {
                             for ( var val = 0; val < thevalue.length; val++ ) {
-                                val != 0 ? line += ', ' : false;
+                                line += val != 0 ? ', ' : false;
                                 line += thevalue[val];
                             }
                         } else {
                             line += thevalue;
                         }
-                        display[lineitem][object]['post'] 
+                        display[lineitem][object]['post']
                             ? line += display[lineitem][object]['post'] : line += ' ';
                     }
                 }
@@ -854,7 +856,7 @@ search box - the end user will not know they are happening.
             event.preventDefault();
             var record = options.data['records'][$(this).attr('href')];
             alert(JSON.stringify(record,"","    "));
-            
+
         }
 
         // put the results on the page
@@ -863,8 +865,8 @@ search box - the end user will not know they are happening.
             // get the data and parse from the es layout
             var data = parseresults(sdata);
             options.data = data;
-            
-            // initialize plot                                                                                                                                                       
+
+            // initialize plot
             if (line_chart == null && options.linechart_field != null && options.linechart_field != "") {
                 line_chart = c3.generate({
                     bindto: '#line_chart',
@@ -884,6 +886,24 @@ search box - the end user will not know they are happening.
                 var facet_filter = $('[id="facetview_'+facetclean+'"]', obj);
                 facet_filter.children().find('.facetview_filtervalue').remove();
                 var records = data["facets"][ facet ];
+
+                // compensate for Solr not being able to show facet results in reverse order
+                if ("order" in options.facets[each] && options.facets[each]["order"].indexOf("reverse") > -1) {
+                    // http://stackoverflow.com/questions/18977881/can-i-loop-through-a-javascript-object-in-reverse-order 
+                    function ReverseObject(Obj){
+                        var TempArr = [];
+                        var NewObj = {};
+                        for (var Key in Obj){
+                            TempArr.push(Key);
+                        }
+                        for (var i = TempArr.length-1; i >= 0; i--){
+                            NewObj[TempArr[i]] = Obj[TempArr[i]];
+                        }
+                        return NewObj;
+                    };
+                    records = ReverseObject(records);
+                }
+
         var years = ['year'];
                 var year_hits = ['hits'];
         var lineChartFacet = false;
@@ -895,7 +915,7 @@ search box - the end user will not know they are happening.
         if (facet == options.dendrogram_field){
             dendrogramFacet = true;
         }
-    
+
         for ( var item in records ) {
             var append = '<tr class="facetview_filtervalue" style="display:none;"><td><a class="facetview_filterchoice' +
                 '" rel="' + facet + '" href="' + item + '">' + item +
@@ -905,7 +925,7 @@ search box - the end user will not know they are happening.
             if (lineChartFacet){
                 years.push(item);
                 year_hits.push(records[item]);
-            } 
+            }
 
             }
 
@@ -936,7 +956,7 @@ search box - the end user will not know they are happening.
             years.push(year);
             year_hits.push(year_hash[year]);
             }
-                                    
+
             line_chart.load({
             columns: [
                 years,
@@ -1050,7 +1070,7 @@ search box - the end user will not know they are happening.
             if (data.found) {
                 var from = options.paging.from + 1;
                 var size = options.paging.size;
-                !size ? size = 10 : "";
+                !size ? size = 100 : "";
                 var to = options.paging.from+size;
                 data.found < to ? to = data.found : "";
                 var meta = metaTmpl.replace(/{{from}}/g, from);
@@ -1066,6 +1086,7 @@ search box - the end user will not know they are happening.
             // put the filtered results on the page
             $('#facetview_results',obj).html("");
             var infofiltervals = new Array();
+
             $.each(data.records, function(index, value) {
                 // write them out to the results div
                  $('#facetview_results', obj).append( buildrecord(index) );
@@ -1167,7 +1188,7 @@ search box - the end user will not know they are happening.
                             qs['filter'] = facet['facet_filter'];
                         }
                     }
-                    
+
                     // check if this should be a nested query
                     var parts = $(this).attr('rel').split('.');
                     if ( options.nested.indexOf(parts[0]) != -1 ) {
@@ -1208,7 +1229,7 @@ search box - the end user will not know they are happening.
             };
             // set any paging
             options.paging.from != 0 ? qs['from'] = options.paging.from : "";
-            options.paging.size != 10 ? qs['size'] = options.paging.size : "";
+            options.paging.size != 100 ? qs['size'] = options.paging.size : "";
             // set any sort or fields options
             options.sort.length > 0 ? qs['sort'] = options.sort : "";
             options.fields ? qs['fields'] = options.fields : "";
@@ -1259,7 +1280,7 @@ search box - the end user will not know they are happening.
         //Solr Search
         var solrsearchquery = function() {
             // set default URL params
-            var urlparams = "";
+            var urlparams = "wt=json&";
             for (var item in options.default_url_params) {
                 urlparams += item + "=" + options.default_url_params[item] + "&";
             }
@@ -1272,10 +1293,22 @@ search box - the end user will not know they are happening.
             var urlfilters = "";
             for (var item in options.facets) {
                 urlfilters += "facet.field=" + options.facets[item]['field'] + "&";
-                if ( options.facets[item]['size'] ) {
-                    urlfilters += "f." + options.facets[item]['field'] + ".facet.limit=" + options.facets[item]['size'] + "&";
-                }
+                var size = options.facets[item]['size'] ? options.facets[item]['size'] : 10;
+                urlfilters += "f." + options.facets[item]['field'] + ".facet.limit=" + size + "&";
+                var sort = 'count';
+                if (options.facets[item]['order']) {
+                    sort = options.facets[item]['order'];
+                    if (sort === 'term' || sort === 'reverse_term') {
+                        sort = 'index';
+                    }
+                    else {
+                        sort = 'count';
+                    };
+                };
+                urlfilters += "f." + options.facets[item]['field'] + ".facet.sort=" + sort + "&";
             }
+            urlfilters += "facet.mincount=1&";
+
             if ( options.facets.length > 0 ) {
                 urlfilters += "facet=on&";
             }
@@ -1293,7 +1326,10 @@ search box - the end user will not know they are happening.
             });
             // add any freetext filter
             if (options.q != "") {
-                query += options.q + '*';
+                query += options.q;
+            }
+            if (!query.endsWith('*')) {
+                query += '*';
             }
             query = query.replace(/ AND $/,"");
             // set a default for blank search
@@ -1314,15 +1350,12 @@ search box - the end user will not know they are happening.
             };
             // make the search query
             var qrystr = '';
-            var url_1 = '';
+            var url_1 = options.search_url;;
             if ( options.search_index == "elasticsearch") {
-                url_1 = options.search_url;
                 qrystr = elasticsearchquery();
             } else {
-                url_1 = options.search_url + solrsearchquery();
                 qrystr = solrsearchquery();
             }
-            //var qrystr = elasticsearchquery();
 
             // augment the URL bar if possible
             if ( options.pushstate ) {
@@ -1332,8 +1365,8 @@ search box - the end user will not know they are happening.
             $.ajax({
                 type: "get",
                 url: url_1,
-                data: {source: qrystr},
-                // processData: false,
+                data: qrystr,
+                processData: false,
                 dataType: options.datatype,
                 jsonp: "json.wrf",
                 success: showresults
@@ -1349,7 +1382,7 @@ search box - the end user will not know they are happening.
         // adjust how many results are shown
         var howmany = function(event) {
             event.preventDefault();
-            var newhowmany = prompt('Currently displaying ' + options.paging.size + 
+            var newhowmany = prompt('Currently displaying ' + options.paging.size +
                 ' results per page. How many would you like instead?');
             if (newhowmany) {
                 options.paging.size = parseInt(newhowmany);
@@ -1358,7 +1391,7 @@ search box - the end user will not know they are happening.
                 dosearch();
             }
         };
-        
+
         // change the search result order
         var order = function(event) {
             event.preventDefault();
@@ -1387,7 +1420,7 @@ search box - the end user will not know they are happening.
             options.paging.from = 0;
             dosearch();
         };
-        
+
         // parse any source params out for an initial search
         var parsesource = function() {
             var qrystr = options.source.query;
@@ -1418,13 +1451,13 @@ search box - the end user will not know they are happening.
                 typeof(qrystr.query_string.query) == 'string' ? options.q = qrystr.query_string.query : "";
             };
         }
-        
+
         // show the current url with the result set as the source param
         var sharesave = function(event) {
             event.preventDefault();
             $('.facetview_sharesavebox', obj).toggle();
         };
-        
+
         // adjust the search field focus
         var searchfield = function(event) {
             event.preventDefault();
@@ -1475,7 +1508,7 @@ search box - the end user will not know they are happening.
             }
         };
         thehelp += '<p><a class="facetview_learnmore label" href="#">close the help</a></p></div>';
-        
+
         // the facet view object to be appended to the page
         var thefacetview = '<div id="facetview"><div class="row-fluid">';
         if ( options.facets.length > 0 ) {
@@ -1522,7 +1555,7 @@ search box - the end user will not know they are happening.
             thefacetview += '<div class="facetview_sharesavebox alert alert-info" style="display:none;"> \
                 <button type="button" class="facetview_sharesave close">Ã—</button> \
                 <p>Share or save this search:</p> \
-                <textarea class="facetview_sharesaveurl" style="width:100%;height:100px;">http://' + window.location.host + 
+                <textarea class="facetview_sharesaveurl" style="width:100%;height:100px;">http://' + window.location.host +
                 window.location.pathname + '?source=' + options.querystring + '</textarea> \
                 </div>';
         }
@@ -1540,7 +1573,7 @@ search box - the end user will not know they are happening.
         return this.each(function() {
             // get this object
             obj = $(this);
-            
+
             // what to do when ready to go
             var whenready = function() {
                 // append the facetview object to this object
@@ -1581,7 +1614,7 @@ search box - the end user will not know they are happening.
                 options.source || options.initialsearch ? dosearch() : "";
 
             };
-            
+
             // check for remote config options, then do first search
             if (options.config_file) {
                 $.ajax({
@@ -1610,7 +1643,7 @@ search box - the end user will not know they are happening.
                 whenready();
             }
 
-        }); // end of the function  
+        }); // end of the function
 
 
     };
@@ -1619,5 +1652,5 @@ search box - the end user will not know they are happening.
     // facetview options are declared as a function so that they can be retrieved
     // externally (which allows for saving them remotely etc)
     $.fn.facetview.options = {};
-    
+
 })(jQuery);
