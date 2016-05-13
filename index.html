@@ -30,51 +30,44 @@
   <script type="text/javascript">
 jQuery(document).ready(function($) {
   $('.facet-view-simple').facetview({
-    "search_url": 'http://localhost:9200/index_name/_search?',
-    "search_index": 'elasticsearch',
-    "datatype": 'json',
+    "search_url": "http://imagecat.dyndns.org:8983/solr/imagecat/select?",
+    "search_index": "solr",
+    "datatype": "json",
     "facets": [
-        {'field':'abstract', 'display':'Abstract'},
-        {'field':'authors', 'display':'Authors'},
-        {'field':'pub_date', 'display':'Publication Date'},
-        {'field':'pub_year', 'display':'Publication Year'},
-        {'field':'title', 'display':'Title'},
-        {'field':'source', 'display':'Source'},
-        {'field':'issue', 'display':'Issue'}
+        {"field":"content", "display":"Content"},
+        {"field":"persons", "display":"Persons"},
+        {"field":"weaponnames", "display":"Weapon Name"},
+        {"field":"location", "display":"Location"},
     ],
-    paging: {
-        from: 0,
-        size: 10
-    },
-    "linechart_field"  : "pub_date",
-    "dendrogram_field" : "authors", 
-    "display_images" : false,
+    "linechart_field"  : "content",
+    "dendrogram_field" : "content", 
+    "display_images" : true,
     "result_display" : [
         [
           {
             "pre" : "<h4>",
-            "field" : "title",
+            "field" : "content",
             "post" : "</h4>"
           }
         ],
         [
           {
-            "pre" : "<b>Authors:  </b><text>",
-            "field" : "authors",
+            "pre" : "<b>Persons:  </b><text>",
+            "field" : "persons",
             "post" : "</text>"
           }
         ],
         [
           {
-            "pre" : "<b>Source:  </b><text>",
-            "field" : "source",
+            "pre" : "<b>Weapon Name:  </b><text>",
+            "field" : "weaponname",
             "post" : "</text><br>"
           }
         ],
         [
           {
             "pre" : "<p>",
-            "field" : "abstract",
+            "field" : "location",
             "post" : "</p>"
           }
         ]
