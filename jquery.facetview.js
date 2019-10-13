@@ -1361,13 +1361,21 @@ search box - the end user will not know they are happening.
                 var currurl = '?source=' + options.querystring;
                 window.history.pushState("","search",currurl);
             };
+	    jsonp_fname = "";
+	    if (options.search_index == "elasticsearch"){
+		jsonp_fname = 'callback';
+	    }
+	    else{
+		jsonp_fname = 'json.wrf';
+	    }
+
             $.ajax({
                 type: "get",
                 url: url_1,
                 data: qrystr,
                 processData: false,
                 dataType: options.datatype,
-                jsonp: "json.wrf",
+                jsonp: jsonp_fname,
                 success: showresults
             });
         };
